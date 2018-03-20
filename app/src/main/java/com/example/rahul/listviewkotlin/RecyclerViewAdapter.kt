@@ -4,30 +4,41 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import com.example.rahul.listviewkotlin.Data.HomeFeed
+import com.squareup.picasso.Picasso
 
 /**
  * Created by Rahul on 3/18/18.
  */
-class RecyclerViewAdapter: RecyclerView.Adapter<CustomViewHolder>() {
-
-    private  val names= arrayListOf<String>("Android","Kotlin","Java","XML","Git")
+class RecyclerViewAdapter(val homeFeed: HomeFeed) : RecyclerView.Adapter<CustomViewHolder>() {
     override fun getItemCount(): Int {
-        return names.size
+        return homeFeed.videos.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CustomViewHolder {
 
         val layoutInflater = LayoutInflater.from(parent?.context)
-        val rowItem=layoutInflater.inflate(R.layout.row_item,parent,false)
+        val rowItem = layoutInflater.inflate(R.layout.recyclerview_row_item, parent, false)
 
         return CustomViewHolder(rowItem)
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder?, position: Int) {
+
+        val video = homeFeed.videos.get(position)
+
+        val thumbnailImageView = holder?.view?.findViewById<ImageView>(R.id.main_image_view)
+        val profileImageview = holder?.view?.findViewById<ImageView>(R.id.profile_image_view)
+
+        holder?.view?.findViewById<TextView>(R.id.title_text_view)?.text = video.name
+  //      holder?.view?.findViewById<TextView>(R.id.channel_name_textview)?.text = video.channle.name
+        Picasso.get().load(video.imageUrl).into(thumbnailImageView)
+     //   Picasso.get().load(video.channle.profileImageUrl).centerCrop().into(profileImageview)
     }
 }
 
-class CustomViewHolder(v:View): RecyclerView.ViewHolder(v) {
+class CustomViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
 }

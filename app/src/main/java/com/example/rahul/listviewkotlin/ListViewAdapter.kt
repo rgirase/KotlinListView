@@ -5,30 +5,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageView
 import android.widget.TextView
+import com.example.rahul.listviewkotlin.Data.HomeFeed
+import com.squareup.picasso.Picasso
 
 /**
  * Created by Rahul on 3/18/18.
  */
-class ListViewAdapter(context: Context) : BaseAdapter() {
+class ListViewAdapter(context: Context, val homeFeed: HomeFeed) : BaseAdapter() {
 
     private val mContext = context
     private  val names= arrayListOf<String>("Android","Kotlin","Java","XML","Git")
     override fun getView(position: Int, converView: View?, viewGroup: ViewGroup?): View {
        val layoutInflater = LayoutInflater.from(mContext)
-        val rowItem=layoutInflater.inflate(R.layout.row_item,viewGroup,false)
+        val rowItem=layoutInflater.inflate(R.layout.recyclerview_row_item,viewGroup,false)
 
-        val nameTextView=rowItem.findViewById<TextView>(R.id.nameView)
-        nameTextView.text=names.get(position)
-
-        val rowCountTextView=rowItem.findViewById<TextView>(R.id.subView)
-        rowCountTextView.text="Number of Rows: $position"
+        val video= homeFeed.videos.get(position)
+        val titleTextView=rowItem.findViewById<TextView>(R.id.title_text_view)
+        titleTextView.text=video.name
+        val thumbnailImageView=rowItem.findViewById<ImageView>(R.id.main_image_view)
+        Picasso.get().load(video.imageUrl).into(thumbnailImageView)
 
         return rowItem
     }
 
     override fun getItem(p0: Int): Any {
-       return "TEST"
+       return p0
     }
 
     override fun getItemId(position: Int): Long {
@@ -36,7 +39,7 @@ class ListViewAdapter(context: Context) : BaseAdapter() {
     }
 
     override fun getCount(): Int {
-        return names.size
+        return homeFeed.videos.count()
     }
 
 

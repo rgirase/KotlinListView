@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.example.rahul.listviewkotlin.Data.HomeFeed
 import com.google.gson.GsonBuilder
-import kotlinx.android.synthetic.main.activity_list_view.*
 import kotlinx.android.synthetic.main.activity_recycler_view.*
 import okhttp3.*
 import java.io.IOException

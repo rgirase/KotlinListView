@@ -16,22 +16,25 @@ import com.squareup.picasso.Picasso
 class ListViewAdapter(context: Context, val homeFeed: HomeFeed) : BaseAdapter() {
 
     private val mContext = context
-    private  val names= arrayListOf<String>("Android","Kotlin","Java","XML","Git")
     override fun getView(position: Int, converView: View?, viewGroup: ViewGroup?): View {
        val layoutInflater = LayoutInflater.from(mContext)
         val rowItem=layoutInflater.inflate(R.layout.recyclerview_row_item,viewGroup,false)
 
         val video= homeFeed.videos.get(position)
         val titleTextView=rowItem.findViewById<TextView>(R.id.title_text_view)
-        titleTextView.text=video.name
         val thumbnailImageView=rowItem.findViewById<ImageView>(R.id.main_image_view)
+        val channleNameTextView=rowItem.findViewById<TextView>(R.id.channel_name_textview)
+        val profileImageView=rowItem.findViewById<ImageView>(R.id.profile_image_view)
+        titleTextView.text=video.name
+        channleNameTextView.text=video.channel.name
         Picasso.get().load(video.imageUrl).into(thumbnailImageView)
+        Picasso.get().load(video.channel.profileImageUrl).into(profileImageView)
 
         return rowItem
     }
 
-    override fun getItem(p0: Int): Any {
-       return p0
+    override fun getItem(position: Int): Any {
+       return position
     }
 
     override fun getItemId(position: Int): Long {

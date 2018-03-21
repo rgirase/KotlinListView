@@ -26,16 +26,16 @@ class RecyclerViewAdapter(val homeFeed: HomeFeed) : RecyclerView.Adapter<CustomV
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder?, position: Int) {
-
         val video = homeFeed.videos.get(position)
+        val channle = video.channel
 
         val thumbnailImageView = holder?.view?.findViewById<ImageView>(R.id.main_image_view)
         val profileImageview = holder?.view?.findViewById<ImageView>(R.id.profile_image_view)
 
         holder?.view?.findViewById<TextView>(R.id.title_text_view)?.text = video.name
-  //      holder?.view?.findViewById<TextView>(R.id.channel_name_textview)?.text = video.channle.name
+        holder?.view?.findViewById<TextView>(R.id.channel_name_textview)?.text = channle.name
         Picasso.get().load(video.imageUrl).into(thumbnailImageView)
-     //   Picasso.get().load(video.channle.profileImageUrl).centerCrop().into(profileImageview)
+        Picasso.get().load(channle.profileImageUrl).into(profileImageview)
     }
 }
 

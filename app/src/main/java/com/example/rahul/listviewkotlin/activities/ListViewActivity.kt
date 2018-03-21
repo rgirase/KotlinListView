@@ -1,23 +1,22 @@
-package com.example.rahul.listviewkotlin
+package com.example.rahul.listviewkotlin.activities
 
-import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import com.example.rahul.listviewkotlin.Data.HomeFeed
+import android.os.Bundle
+import com.example.rahul.listviewkotlin.data.HomeFeed
+import com.example.rahul.listviewkotlin.R
+import com.example.rahul.listviewkotlin.adapter.ListViewAdapter
 import com.google.gson.GsonBuilder
-import kotlinx.android.synthetic.main.activity_recycler_view.*
+import kotlinx.android.synthetic.main.activity_list_view.*
 import okhttp3.*
 import java.io.IOException
 
-class RecyclerViewActivity : AppCompatActivity() {
+class ListViewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_recycler_view)
-        main_recyclerView.layoutManager = LinearLayoutManager(this)
+        setContentView(R.layout.activity_list_view)
         fetchJson()
     }
-
 
     fun fetchJson() {
         val url = "https://api.letsbuildthatapp.com/youtube/home_feed"
@@ -33,7 +32,7 @@ class RecyclerViewActivity : AppCompatActivity() {
 
                 val homeFeed = gson.fromJson(body, HomeFeed::class.java)
                 runOnUiThread {
-                    main_recyclerView.adapter = RecyclerViewAdapter(homeFeed)
+                   main_listView.adapter= ListViewAdapter(applicationContext, homeFeed)
                 }
 
             }

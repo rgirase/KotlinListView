@@ -1,4 +1,4 @@
-package com.example.rahul.listviewkotlin.Data
+package com.example.rahul.listviewkotlin.data
 
 /**
  * Created by Rahul on 3/19/18.

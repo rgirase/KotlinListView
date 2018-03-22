@@ -20,11 +20,14 @@
         </activity>
         <activity android:name=".activities.ListViewActivity" />
         <activity android:name=".activities.RecyclerViewActivity" />
-        <activity android:name=".activities.DetailViewActivity"
+        <activity
+            android:name=".activities.DetailViewActivity"
             android:launchMode="singleTop">
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.RecyclerViewActivity"/>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.RecyclerViewActivity" />
         </activity>
+        <activity android:name=".activities.WebviewActivity"></activity>
     </application>
 
 </manifest>

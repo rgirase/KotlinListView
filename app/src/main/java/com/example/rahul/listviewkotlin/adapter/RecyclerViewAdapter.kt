@@ -1,5 +1,6 @@
 package com.example.rahul.listviewkotlin.adapter
 
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.rahul.listviewkotlin.data.HomeFeed
 import com.example.rahul.listviewkotlin.R
+import com.example.rahul.listviewkotlin.activities.DetailViewActivity
+import com.example.rahul.listviewkotlin.data.Video
 import com.squareup.picasso.Picasso
 
 /**
@@ -40,6 +43,13 @@ class RecyclerViewAdapter(val homeFeed: HomeFeed) : RecyclerView.Adapter<CustomV
     }
 }
 
-class CustomViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+class CustomViewHolder(val view: View, val video:Video?=null) : RecyclerView.ViewHolder(view) {
 
+    init {
+        view.setOnClickListener {
+            val intent= Intent(view.context,DetailViewActivity::class.java)
+            intent.putExtra("ID",video?.id)
+            view.context.startActivity(intent)
+        }
+    }
 }

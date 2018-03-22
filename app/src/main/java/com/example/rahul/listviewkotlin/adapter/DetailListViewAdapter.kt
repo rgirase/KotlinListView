@@ -1,26 +1,50 @@
 package com.example.rahul.listviewkotlin.adapter
 
+import android.content.Intent
+import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
+import android.widget.ImageView
+import android.widget.TextView
+import com.example.rahul.listviewkotlin.R
+import com.example.rahul.listviewkotlin.activities.DetailViewActivity
+import com.example.rahul.listviewkotlin.data.DetailList
+import com.squareup.picasso.Picasso
 
 /**
  * Created by Rahul on 3/20/18.
  */
-class DetailListViewAdapter: BaseAdapter() {
-    override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+class DetailListViewAdapter(val detailList: Array<DetailList>) : RecyclerView.Adapter<DetailListViewHolder>() {
+    override fun onBindViewHolder(holder: DetailListViewHolder?, position: Int) {
+        val thumbnailImageView = holder?.view?.findViewById<ImageView>(R.id.list_imageView)
+        val listNameTextView = holder?.view?.findViewById<TextView>(R.id.nameView)
+        val durationTextView = holder?.view?.findViewById<TextView>(R.id.durationTextView)
+
+        listNameTextView?.text = detailList.get(position).name
+        durationTextView?.text = detailList.get(position).duration
+        Picasso.get().load(detailList.get(position).imageUrl).into(thumbnailImageView)
     }
 
-    override fun getItem(p0: Int): Any {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun getItemCount(): Int {
+        return detailList.size
     }
 
-    override fun getItemId(p0: Int): Long {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): DetailListViewHolder {
+        val layoutInflater = LayoutInflater.from(parent?.context)
+        val rowItem = layoutInflater.inflate(R.layout.detail_row_item, parent, false)
+
+        return DetailListViewHolder(rowItem)
     }
 
-    override fun getCount(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+}
+
+class DetailListViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+
+    init {
+        view.setOnClickListener {
+            val intent = Intent(view.context, DetailViewActivity::class.java)
+            view.context.startActivity(intent)
+        }
     }
 }

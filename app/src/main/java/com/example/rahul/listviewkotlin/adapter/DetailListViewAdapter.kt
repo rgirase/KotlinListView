@@ -9,7 +9,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.rahul.listviewkotlin.R
 import com.example.rahul.listviewkotlin.activities.DetailViewActivity
+import com.example.rahul.listviewkotlin.activities.WebviewActivity
 import com.example.rahul.listviewkotlin.data.DetailList
+import com.example.rahul.listviewkotlin.data.Video
 import com.squareup.picasso.Picasso
 
 /**
@@ -24,6 +26,8 @@ class DetailListViewAdapter(val detailList: Array<DetailList>) : RecyclerView.Ad
         listNameTextView?.text = detailList.get(position).name
         durationTextView?.text = detailList.get(position).duration
         Picasso.get().load(detailList.get(position).imageUrl).into(thumbnailImageView)
+
+        holder?.detailList = detailList.get(position)
     }
 
     override fun getItemCount(): Int {
@@ -39,11 +43,12 @@ class DetailListViewAdapter(val detailList: Array<DetailList>) : RecyclerView.Ad
 
 }
 
-class DetailListViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+class DetailListViewHolder(val view: View, var detailList: DetailList? = null) : RecyclerView.ViewHolder(view) {
 
     init {
         view.setOnClickListener {
-            val intent = Intent(view.context, DetailViewActivity::class.java)
+            val intent = Intent(view.context, WebviewActivity::class.java)
+            intent.putExtra("Link", detailList?.link)
             view.context.startActivity(intent)
         }
     }

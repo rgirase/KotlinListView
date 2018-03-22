@@ -43,12 +43,12 @@ class RecyclerViewAdapter(val homeFeed: HomeFeed) : RecyclerView.Adapter<CustomV
     }
 }
 
-class CustomViewHolder(val view: View, val video:Video?=null) : RecyclerView.ViewHolder(view) {
+class CustomViewHolder(val view: View, val video: Video? = null) : RecyclerView.ViewHolder(view) {
 
     init {
         view.setOnClickListener {
-            val intent= Intent(view.context,DetailViewActivity::class.java)
-            intent.putExtra("ID",video?.id)
+            val intent = Intent(view.context, DetailViewActivity::class.java)
+            intent.putExtra("ID", video?.id)
             view.context.startActivity(intent)
         }
     }
